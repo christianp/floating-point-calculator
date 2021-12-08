@@ -1,0 +1,177 @@
+#calculator {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    --transition-time: 0.1s;
+    --background: skyblue;
+    --button-bg: hsl(120,70%,70%);
+    --button-border: hsl(120,70%,50%);
+    --point-color: hsl(0,70%,30%);
+    --point-outline: var(--background);
+    --derivation-color: var(--point-color);
+}
+
+svg.board {
+    width: 100%;
+    height: 100%;
+    background: var(--background);
+}
+
+svg.board text {
+    user-select: none;
+    dominant-baseline: central;
+    text-anchor: middle;
+}
+
+.point.selected:focus {
+    outline: none;
+}
+
+#mouse {
+    fill: black;
+}
+
+.point {
+    cursor: pointer;
+}
+
+.point .container, #new-points .making-new-point {
+    fill: var(--point-color);
+    stroke: var(--point-outline);
+    stroke-width: 3;
+    transition: fill var(--transition-time), stroke var(--transition-time);
+}
+.point.hover .container {
+    --point-color: hsl(120,70%,30%);
+    --point-outline: hsl(120,70%,50%);
+}
+.point.selected .container {
+    --point-color: hsl(240,70%,30%);
+    --point-outline: hsl(240,70%,50%);
+}
+.point .pressing {
+    fill: white;
+    stroke: none;
+    opacity: 0.2;
+}
+.point .label {
+    fill: white;
+    font-family: monospace;
+    font-size: 30px;
+}
+
+.point.derived .name {
+    text-anchor: start;
+}
+
+#new-line {
+    stroke: var(--derivation-color);
+    stroke-dasharray: 3 3;
+}
+
+.derivation .lines {
+    stroke: var(--derivation-color);
+    fill: none;
+    stroke-width: 3;
+}
+
+.derivation .arrow {
+    fill: var(--derivation-color);
+    stroke: none;
+}
+
+.button.next-op .container {
+    fill: hsl(240,10%,90%);
+    stroke: var(--background);
+    stroke-width: 3;
+}
+
+.button .container {
+    fill: white;
+    stroke: var(--background);
+    stroke-width: 3;
+}
+
+.button.hover .container {
+    fill: hsl(120,70%,90%);
+}
+
+#input {
+    display: grid;
+    grid-gap: 0.3em;
+    grid-template-columns: repeat(7,2rem);
+    grid-template-rows: 2rem repeat(4,2rem);
+    grid-template-areas:
+    "name    name    name    name    name    name    name"
+    "display display display display display display delete"
+    "digit-7 digit-7 digit-8 digit-8 digit-9 digit-9 add" 
+    "digit-4 digit-4 digit-5 digit-5 digit-6 digit-6 subtract" 
+    "digit-1 digit-1 digit-2 digit-2 digit-3 digit-3 times" 
+    "digit-0 digit-0 dot     dot     enter   enter   divide"
+    ;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 1rem;
+    background: white;
+}
+
+@media screen and (max-aspect-ratio: 4/5) {
+    #calculator {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr auto;
+    }
+    #input {
+        padding: 0;
+        position: relative;
+    grid-template-columns: repeat(7,1fr);
+    grid-template-rows: 2rem repeat(4,1.5rem);
+    }
+}
+
+#input #line-display { 
+    grid-area: display;
+    font-family: monospace;
+    padding: 0.5em;
+    font-size: 1rem;
+    height: 2em;
+}
+
+#input .digit-0 { grid-area: digit-0; }
+#input .digit-1 { grid-area: digit-1; }
+#input .digit-2 { grid-area: digit-2; }
+#input .digit-3 { grid-area: digit-3; }
+#input .digit-4 { grid-area: digit-4; }
+#input .digit-5 { grid-area: digit-5; }
+#input .digit-6 { grid-area: digit-6; }
+#input .digit-7 { grid-area: digit-7 }
+#input .digit-8 { grid-area: digit-8; }
+#input .digit-9 { grid-area: digit-9; }
+#input .decimal-separator { grid-area: dot; }
+#input .delete { grid-area: delete; }
+#input .enter { grid-area: enter; }
+#input .add { grid-area: add; }
+#input .subtract { grid-area: subtract; }
+#input .times { grid-area: times; }
+#input .divide { grid-area: divide; }
+
+#input button {
+    border: none;
+    background: var(--button-bg);
+    font-size: 1rem;
+    border: 0.2em solid var(--button-border);
+    font-family: monospace;
+}
+#input button:hover {
+    --button-bg: hsl(240,70%,70%);
+    --button-border: hsl(240,70%,50%);
+}
+#input #name-input {
+    grid-area: name;
+    display: flex;
+    grid-gap: 0.5em;
+}
+#input #name-input input {
+    width: 100%;
+}

@@ -1,0 +1,14 @@
+{
+    "name": "Floating Point calculator",
+    "short_name": "floating-calc",
+    "description": "CLP's floating point calculator",
+    "categories": [],
+    "theme_color": "skyblye",
+    "background_color": "skyblue",
+    "display": "standalone",
+    "orientation": "natural",
+    "lang": "en",
+    "dir": "ltr",
+    "start_url": "/"
+}
+
